@@ -18,7 +18,7 @@ function onRunButtonClick() {
 
         document.getElementById("imgContainer").classList.remove("hidden");
 
-        const server = "http://localhost:5000";
+        const server = "https://vord-server.onrender.com";
 
         textEmbeds.then((text) => {
             fetch(`${server}/semsegsearch`, {
