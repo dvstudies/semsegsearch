@@ -6,7 +6,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0"
         />
-        <title>SemSegSearch</title>
+        <title>Sem seg search</title>
 
         <!-- Import Tailwind -->
         <link
@@ -71,17 +71,15 @@
             </div>
 
             <!-- Img  Container -->
+            <canvas
+                class="rounded-lg p-10 flex items-center justify-center shadow-canvas"
+                id="imgCanvas"
+            ></canvas>
+
             <div
-                class="rounded-lg p-10 flex items-center justify-center"
-                id="imgContainer"
-            >
-                <img
-                    id="selectedImage"
-                    src=""
-                    alt="Selected Artwork"
-                    class="object-contain max-w-full max-h-full hidden rounded-lg shadow-lg"
-                />
-            </div>
+                id="scoreDiv"
+                class="absolute right-0 bottom-0 rounded-full bg-blue-500 px-4 py-2 border rounded-lg text-white hidden"
+            ></div>
         </div>
 
         <!-- Input and Button -->
