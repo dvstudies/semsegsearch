@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>SemSegSearch</title>
+
+        <!-- Import Tailwind -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- Import Lucide icons -->
+        <script src="https://unpkg.com/lucide@latest"></script>
+
+        <!-- Import Fonts  -->
+        <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+        />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+            rel="stylesheet"
+        />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Import Custom css -->
+        <link
+            rel="stylesheet"
+            href="style.css"
+        />
+    </head>
+    <body class="flex flex-col h-full">
+        <!-- Title and Subtitle -->
+        <div
+            class="flex items-center justify-center flex-col h-1/6 pt-20 pb-10"
+        >
+            <h1 class="text-5xl font-bold title">Sem Seg Search</h1>
+            <p class="text-lg text-gray-600 pt-5">
+                Semantically searching through a collection of paintings'
+                segmentations
+            </p>
+        </div>
+
+        <!-- Results Container -->
+        <div
+            class="w-10/12 mx-auto mb-10 relative h-full flex justify-between gap-4 overflow-hidden"
+        >
+            <!-- Text  Container -->
+            <div
+                class="w-1/2 overflow-y-auto border rounded-lg p-10"
+                id="textContainer"
+            >
+                <ol
+                    id="resultsList"
+                    class="space-y-2 p-l-4"
+                ></ol>
+            </div>
+
+            <!-- Img  Container -->
+            <div
+                class="rounded-lg p-10 flex items-center justify-center"
+                id="imgContainer"
+            >
+                <img
+                    id="selectedImage"
+                    src=""
+                    alt="Selected Artwork"
+                    class="object-contain max-w-full max-h-full hidden rounded-lg shadow-lg"
+                />
+            </div>
+        </div>
+
+        <!-- Input and Button -->
+        <div class="flex items-center justify-center h-1/6 space-x-4">
+            <!-- Text Input -->
+            <input
+                id="textInput"
+                type="text"
+                class="border rounded-full px-4 py-2 w-1/2 text-center"
+                placeholder="enter your query"
+            />
+
+            <!-- Toggle Button -->
+            <button
+                id="toggleMode"
+                class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-blue-600 transition bg-blue-500 rounded-full text-white p-2"
+                title="Toggle View Mode"
+            >
+                <i
+                    id="toggleIcon"
+                    data-lucide="image"
+                ></i>
+            </button>
+
+            <!-- Run Button -->
+            <button
+                id="runBtn"
+                class="bg-blue-500 rounded-full text-white px-4 py-2"
+            >
+                Run
+            </button>
+        </div>
+
+        <!-- Colophon -->
+        <div
+            class="flex items-center justify-center h-1/12 pb-5 flex-col text-gray-500"
+        >
+            <p class="text-sm">
+                VORD
+
+                <a
+                    href="https://doi.org/10.5167/uzh-240287"
+                    target="_blank"
+                    class=""
+                >
+                    <i class="fa-solid fa-file"></i>
+                </a>
+            </p>
+            <p class="text-xs">
+                <a
+                    href="https://dvstudies.net/"
+                    target="_blank"
+                >
+                    (MPG) Digital Visual Studies - UZH &copy; 2025</a
+                >
+            </p>
+        </div>
+
+        <script
+            src="search.js"
+            type="module"
+        ></script>
+    </body>
+</html>
