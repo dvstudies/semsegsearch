@@ -29,29 +29,45 @@ export async function getTextEmbeds(text) {
     return normalizedTextEmbeds;
 }
 
-export function drawRoundedImage(ctx, img, x, y, width, height, radius = 20) {
-    // Save context state
+export function drawRoundedImage(
+    ctx,
+    img,
+    x,
+    y,
+    width,
+    height,
+    mask = undefined,
+    alpha = 1,
+    radius = 20
+) {
+    ctx.globalAlpha = alpha;
     ctx.save();
 
-    // Optional: Add shadow like a div
-    // if (shadow) {
-    //     ctx.shadowColor = "rgba(0, 0, 0, 1)";
-    //     ctx.shadowBlur = 15;
-    //     ctx.shadowOffsetX = 5;
-    //     ctx.shadowOffsetY = 5;
-    // }
+    let x1, y1, h1, w1;
+
+    if (mask !== undefined) {
+        x1 = mask[0];
+        w1 = mask[1];
+        y1 = mask[2];
+        h1 = mask[3];
+    } else {
+        x1 = x;
+        w1 = width;
+        y1 = y;
+        h1 = height;
+    }
 
     // Create rounded rect path
     ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.lineTo(x + width - radius, y);
-    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-    ctx.lineTo(x + width, y + height - radius);
-    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-    ctx.lineTo(x + radius, y + height);
-    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-    ctx.lineTo(x, y + radius);
-    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.moveTo(x1 + radius, y1);
+    ctx.lineTo(x1 + w1 - radius, y1);
+    ctx.quadraticCurveTo(x1 + w1, y1, x1 + w1, y1 + radius);
+    ctx.lineTo(x1 + w1, y1 + h1 - radius);
+    ctx.quadraticCurveTo(x1 + w1, y1 + h1, x1 + w1 - radius, y1 + h1);
+    ctx.lineTo(x1 + radius, y1 + h1);
+    ctx.quadraticCurveTo(x1, y1 + h1, x1, y1 + h1 - radius);
+    ctx.lineTo(x1, y1 + radius);
+    ctx.quadraticCurveTo(x1, y1, x1 + radius, y1);
     ctx.closePath();
 
     // Clip to rounded rect

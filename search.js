@@ -33,6 +33,8 @@ function onRunButtonClick() {
             })
                 .then((res) => res.json())
                 .then((data) => {
+                    console.log(data);
+
                     const btnResults = [];
                     data.forEach((item, i) => {
                         const li = document.createElement("li");
@@ -85,8 +87,52 @@ function onRunButtonClick() {
                                     x,
                                     y,
                                     scaledWidth,
-                                    scaledHeight
+                                    scaledHeight,
+                                    undefined,
+                                    isImageMode == true ? 1 : 0.5
                                 );
+
+                                if (isImageMode == false) {
+                                    drawRoundedImage(
+                                        ctx,
+                                        img,
+                                        x,
+                                        y,
+                                        scaledWidth,
+                                        scaledHeight,
+                                        [
+                                            x +
+                                                (item.mask.centroid[0] *
+                                                    scaledWidth -
+                                                    item.mask.width * scale),
+                                            item.mask.width * scale * 2,
+                                            y +
+                                                (item.mask.centroid[1] *
+                                                    scaledHeight -
+                                                    item.mask.height * scale),
+                                            item.mask.height * scale * 2,
+                                        ],
+                                        1
+                                    );
+                                }
+
+                                // Draw dot at  centroid position
+                                const dotSize = 10;
+                                ctx.fillStyle = "#2b7fff";
+                                ctx.fillRect(
+                                    x +
+                                        item.mask.centroid[0] * scaledWidth -
+                                        dotSize / 2,
+                                    y +
+                                        item.mask.centroid[1] * scaledHeight -
+                                        dotSize / 2,
+                                    dotSize / 2,
+                                    dotSize / 2
+                                );
+
+                                ctx.lineWidth = 1;
+                                ctx.strokeStyle = "#2b7fff";
+                                ctx.stroke();
 
                                 ctx.shadowColor = "rgb(0, 0, 0)";
                                 ctx.shadowOffsetX = 20;
@@ -115,9 +161,11 @@ function onRunButtonClick() {
                             toggleActive(li, btnResults);
 
                             scoreDiv.classList.remove("hidden");
-                            scoreDiv.innerHTML = `${(item.score * 100).toFixed(
-                                2
-                            )} %`;
+                            scoreDiv.innerHTML = `${(
+                                (isImageMode == true
+                                    ? item.score
+                                    : item.mask.score) * 100
+                            ).toFixed(2)} %`;
                         }
 
                         li.addEventListener("mouseover", () => {
@@ -125,9 +173,11 @@ function onRunButtonClick() {
                             toggleActive(li, btnResults);
 
                             scoreDiv.classList.remove("hidden");
-                            scoreDiv.innerHTML = `${(item.score * 100).toFixed(
-                                2
-                            )} %`;
+                            scoreDiv.innerHTML = `${(
+                                (isImageMode == true
+                                    ? item.score
+                                    : item.mask.score) * 100
+                            ).toFixed(2)} %`;
                         });
 
                         resultsList.appendChild(li);
